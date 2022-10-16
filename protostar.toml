@@ -1,0 +1,15 @@
+["protostar.config"]
+protostar_version = "0.5.0"
+
+["protostar.test"]
+disable-hint-validation = true
+
+["protostar.project"]
+libs_path = "./lib"         
+
+# This section is explained in the "Project compilation" guide.
+["protostar.contracts"]
+main = [
+  "./src/main.cairo",
+]
+
