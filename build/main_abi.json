@@ -1,25 +1,94 @@
 [
     {
-        "inputs": [
+        "members": [
             {
-                "name": "users_address",
+                "name": "timestamp",
+                "offset": 0,
+                "type": "felt"
+            },
+            {
+                "name": "amount",
+                "offset": 1,
+                "type": "felt"
+            },
+            {
+                "name": "type",
+                "offset": 2,
                 "type": "felt"
             }
         ],
-        "name": "constructor",
+        "name": "Transaction",
+        "size": 3,
+        "type": "struct"
+    },
+    {
+        "inputs": [
+            {
+                "name": "price",
+                "type": "felt"
+            },
+            {
+                "name": "timestamp",
+                "type": "felt"
+            },
+            {
+                "name": "type",
+                "type": "felt"
+            },
+            {
+                "name": "current_index",
+                "type": "felt"
+            }
+        ],
+        "name": "input_data",
+        "outputs": [
+            {
+                "name": "res_len",
+                "type": "felt"
+            },
+            {
+                "name": "res",
+                "type": "Transaction*"
+            }
+        ],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "price",
+                "type": "felt"
+            }
+        ],
+        "name": "increase_amount",
         "outputs": [],
-        "type": "constructor"
+        "type": "function"
     },
     {
         "inputs": [],
-        "name": "get_users_address",
+        "name": "get_amount",
         "outputs": [
             {
-                "name": "users_address",
+                "name": "res",
                 "type": "felt"
             }
         ],
-        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "milisecond",
+                "type": "felt"
+            }
+        ],
+        "name": "set_time",
+        "outputs": [
+            {
+                "name": "res",
+                "type": "felt"
+            }
+        ],
         "type": "function"
     }
 ]

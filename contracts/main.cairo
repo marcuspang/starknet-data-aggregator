@@ -3,7 +3,7 @@ from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.cairo.common.alloc import alloc
 from starkware.cairo.common.uint256 import Uint256
 
-struct nftDataStruct{
+struct NftData {
     nft_id: felt,
     nft_name: felt*,
     nft_name_len: felt,
@@ -50,28 +50,20 @@ func Time() -> (res: felt) {
 func time_unit() -> (res: felt) {
 }
 
-
+// Insert data to smart contract
 @external
 func input_data{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
-    price: felt, timestamp:felt, type: felt, current_index: felt
-)->(res_len:felt, res: Transaction*) {
+    price: felt, timestamp: felt, type: felt
+) -> () {
     // create a array of struct pointer
-    let(data: Transaction*) = alloc();
-    // insert the value into the array
-    assert data[current_index].timestamp = timestamp;
-    assert data[current_index].amount = price;
-    assert data[current_index].type = type;
+    let (current_index) = transaction_length.read();
+    transaction.write(
+        index=current_index,
+        value=Transaction(timestamp=timestamp, amount=price, type=type)
+    );
 
-    //Increase the amount to get the total
-    increase_amount(data[current_index].amount);
-
-    //recursion
-    let(res_len,res) = input_data(price, timestamp, type, current_index+1);
-
-    // return felt and a Transaction struct pointer array
-    return(res_len,res);
+    return ();
 }
-
 
 // @external
 // func input_data_internal{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
@@ -83,8 +75,6 @@ func input_data{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}
 //     let(res_len,res) = input_data_internal(price,timestamp,type,current_index+1);
 //     return(res_len,res);
 // }
-
-
 
 // @external
 // func get_each_amount_internal{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
@@ -98,28 +88,24 @@ func input_data{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}
 //     return(res_len, res);
 // }
 
-
 @external
-func increase_amount{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
-    price: felt
-) {
- let(res) = Amount.read();
- Amount.write(res + price);
- return();
+func increase_amount{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(price: felt) {
+    let (res) = Amount.read();
+    Amount.write(res + price);
+    return ();
 }
 
 @external
-func get_amount{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
-)->(res: felt){
+func get_amount{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (res: felt) {
     let (res) = Amount.read();
-    return(res=res);
+    return (res=res);
 }
 
 @external
 func set_time{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     milisecond: felt
-)->(res:felt) {
+) -> (res: felt) {
     let (res) = Time.read();
     Time.write(milisecond);
-    return(res=res);
+    return (res=res);
 }

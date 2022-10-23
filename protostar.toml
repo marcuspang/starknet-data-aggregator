@@ -10,5 +10,6 @@ libs_path = "./contracts"
 # This section is explained in the "Project compilation" guide.
 ["protostar.contracts"]
 main = [
-  "./src/main.cairo",
+  "./contracts/main.cairo",
 ]
+
