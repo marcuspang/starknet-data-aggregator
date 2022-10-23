@@ -1,0 +1,193 @@
+{
+    "data": {
+      "collections": [
+        {
+          "id": "0x014b6a629d6d8deb6f2cde20e2d5a99d4a601fec",
+          "sales": [
+            {
+              "id": "0x0bb605adf2a1b55ad986f4ce2e6ebae72673cd77f67cbc9268ec3e94c8d7884e-73",
+              "sellHash": "0x62c6975228de68d00235a8538106f87e49fb559dd1c1e31236af9241c1ae8fef",
+              "buyHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+              "buyer": {
+                "id": "0x25d49f83ba4b9d4ac3f075140044cd462ea64952"
+              },
+              "seller": {
+                "id": "0x8391e3e904ad6050819f90c1a3a180fda288924d"
+              },
+              "price": "2200",
+              "paymentToken": null,
+              "collection": {
+                "id": "0x014b6a629d6d8deb6f2cde20e2d5a99d4a601fec",
+                "nft": {
+                  "id": "0x014b6a629d6d8deb6f2cde20e2d5a99d4a601fec-3775",
+                  "tokenID": "3775"
+                }
+              },
+              "eventType": "SALE",
+              "logNumber": "73",
+              "txHash": "0x0bb605adf2a1b55ad986f4ce2e6ebae72673cd77f67cbc9268ec3e94c8d7884e",
+              "blockHash": "0xd7f0ea0528e17cb22fa1715ede463dac5a30aff0a0c54fdb83c7d60a76ff7460",
+              "timestamp": "1664504795",
+              "blockNumber": "15643162"
+            },
+            {
+              "id": "0x0c449deac68ea2b8d94cb435780f9028a4fc8c7315f536e44be69b3cfd49d60e-309",
+              "sellHash": "0x37ea932726f7584b5b9df7937e6d57585cc253d3467b3776f2a64e5988a82cf1",
+              "buyHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+              "buyer": {
+                "id": "0x2b11d8a92835454763afeb72c6a427cfdb334630"
+              },
+              "seller": {
+                "id": "0x8391e3e904ad6050819f90c1a3a180fda288924d"
+              },
+              "price": "2500",
+              "paymentToken": null,
+              "collection": {
+                "id": "0x014b6a629d6d8deb6f2cde20e2d5a99d4a601fec",
+                "nft": {
+                  "id": "0x014b6a629d6d8deb6f2cde20e2d5a99d4a601fec-3775",
+                  "tokenID": "3775"
+                }
+              },
+              "eventType": "SALE",
+              "logNumber": "309",
+              "txHash": "0x0c449deac68ea2b8d94cb435780f9028a4fc8c7315f536e44be69b3cfd49d60e",
+              "blockHash": "0x61079b3cc26768111c530254da43b68283af1c8896a068a857a6fde6a8eb574c",
+              "timestamp": "1664599271",
+              "blockNumber": "15650987"
+            },
+            {
+              "id": "0x27ff2f52a43d21b3b91e3c32329fa59c5bf9d5f260570be169880724a377fd5d-147",
+              "sellHash": "0x815f7d03189d8b4d83ce2f1f148f26ec26c1fdb1542e8466c4ee2f56d5b26b25",
+              "buyHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+              "buyer": {
+                "id": "0xbe6ce194eea16a4be261de760c2f049e10f9f8ae"
+              },
+              "seller": {
+                "id": "0x8391e3e904ad6050819f90c1a3a180fda288924d"
+              },
+              "price": "2500",
+              "paymentToken": null,
+              "collection": {
+                "id": "0x014b6a629d6d8deb6f2cde20e2d5a99d4a601fec",
+                "nft": {
+                  "id": "0x014b6a629d6d8deb6f2cde20e2d5a99d4a601fec-3775",
+                  "tokenID": "3775"
+                }
+              },
+              "eventType": "SALE",
+              "logNumber": "147",
+              "txHash": "0x27ff2f52a43d21b3b91e3c32329fa59c5bf9d5f260570be169880724a377fd5d",
+              "blockHash": "0x1244552e45eab09a160a05c936f45886a5963c2080a49aa75ceefe3bb411a0b9",
+              "timestamp": "1664598803",
+              "blockNumber": "15650948"
+            },
+            {
+              "id": "0x66d79faf003c57de092f64ac525453f2eeeaae985c01f00e007d304b17a07b00-80",
+              "sellHash": "0x1350e545640c76ca0932fb90ff492a01e370946a11afc3dda3b23ca086c015a4",
+              "buyHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+              "buyer": {
+                "id": "0x2b11d8a92835454763afeb72c6a427cfdb334630"
+              },
+              "seller": {
+                "id": "0x8391e3e904ad6050819f90c1a3a180fda288924d"
+              },
+              "price": "2300",
+              "paymentToken": null,
+              "collection": {
+                "id": "0x014b6a629d6d8deb6f2cde20e2d5a99d4a601fec",
+                "nft": {
+                  "id": "0x014b6a629d6d8deb6f2cde20e2d5a99d4a601fec-3775",
+                  "tokenID": "3775"
+                }
+              },
+              "eventType": "SALE",
+              "logNumber": "80",
+              "txHash": "0x66d79faf003c57de092f64ac525453f2eeeaae985c01f00e007d304b17a07b00",
+              "blockHash": "0x65fe7f504247a1de7798010e9b97466c146d313e4c5b3c9669ec6639f6f496f4",
+              "timestamp": "1664598683",
+              "blockNumber": "15650938"
+            },
+            {
+              "id": "0x97e7a4fa1a489fc34f178188458e14040b834d64b3ac4d5f247f9a980be5869b-212",
+              "sellHash": "0x505b898d0e729666fe0453250480b00bce58cf7f8d6d853ff68be06bfdece41c",
+              "buyHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+              "buyer": {
+                "id": "0x25d49f83ba4b9d4ac3f075140044cd462ea64952"
+              },
+              "seller": {
+                "id": "0x8391e3e904ad6050819f90c1a3a180fda288924d"
+              },
+              "price": "2350",
+              "paymentToken": null,
+              "collection": {
+                "id": "0x014b6a629d6d8deb6f2cde20e2d5a99d4a601fec",
+                "nft": {
+                  "id": "0x014b6a629d6d8deb6f2cde20e2d5a99d4a601fec-3775",
+                  "tokenID": "3775"
+                }
+              },
+              "eventType": "SALE",
+              "logNumber": "212",
+              "txHash": "0x97e7a4fa1a489fc34f178188458e14040b834d64b3ac4d5f247f9a980be5869b",
+              "blockHash": "0x7438c162430ac65308f5ee2e806401cad0a6307fe726a4874f7dcc6850d40453",
+              "timestamp": "1664598743",
+              "blockNumber": "15650943"
+            },
+            {
+              "id": "0xb9da4f297f35ae5c7a7c6f8e29406c06f8c36ddfa8bcacb0a4bbe4ea7a294b77-99",
+              "sellHash": "0x8a8ebd3f011f6211000f67b9c01215db3b224443df572c4eac8ec822851b89e3",
+              "buyHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+              "buyer": {
+                "id": "0xa3659699e708c57a1c8fd2d8d290810a8078c3b0"
+              },
+              "seller": {
+                "id": "0x8391e3e904ad6050819f90c1a3a180fda288924d"
+              },
+              "price": "2599",
+              "paymentToken": null,
+              "collection": {
+                "id": "0x014b6a629d6d8deb6f2cde20e2d5a99d4a601fec",
+                "nft": {
+                  "id": "0x014b6a629d6d8deb6f2cde20e2d5a99d4a601fec-3775",
+                  "tokenID": "3775"
+                }
+              },
+              "eventType": "SALE",
+              "logNumber": "99",
+              "txHash": "0xb9da4f297f35ae5c7a7c6f8e29406c06f8c36ddfa8bcacb0a4bbe4ea7a294b77",
+              "blockHash": "0x9eb95a0b83f77627c769b93d848a08c188d8bf967f5fe81da7fd6bc4e289775d",
+              "timestamp": "1664599727",
+              "blockNumber": "15651025"
+            },
+            {
+              "id": "0xe67be4c29288c1b8d180ec7c61eef37d9f5202a3a32df15ede024a9e576913b6-189",
+              "sellHash": "0xa44cd1bbcb21adb4ca9ff33ae677aeca7dcc2e3e8a44ac7f2fc66212b71fb9be",
+              "buyHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+              "buyer": {
+                "id": "0x091d84811b9d9a54d44c3826e658f58af8883502"
+              },
+              "seller": {
+                "id": "0x8391e3e904ad6050819f90c1a3a180fda288924d"
+              },
+              "price": "2300",
+              "paymentToken": null,
+              "collection": {
+                "id": "0x014b6a629d6d8deb6f2cde20e2d5a99d4a601fec",
+                "nft": {
+                  "id": "0x014b6a629d6d8deb6f2cde20e2d5a99d4a601fec-3775",
+                  "tokenID": "3775"
+                }
+              },
+              "eventType": "SALE",
+              "logNumber": "189",
+              "txHash": "0xe67be4c29288c1b8d180ec7c61eef37d9f5202a3a32df15ede024a9e576913b6",
+              "blockHash": "0xc8e3a20d19c048292d643caf4178296de21d17d68d63277681764f12e674eea6",
+              "timestamp": "1664598575",
+              "blockNumber": "15650929"
+            }
+          ]
+        }
+      ]
+    }
+  }
