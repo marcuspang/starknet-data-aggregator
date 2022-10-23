@@ -1,38 +1,48 @@
 %lang starknet
 from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.cairo.common.alloc import alloc
-from starkware.cairo.common.uint256 import Uint256
+from starkware.cairo.common.uint256 import (Uint256, split_64)
 
-struct NftData {
-    nft_id: felt,
-    nft_name: felt*,
-    nft_name_len: felt,
+struct NftTransactionData {
+    collection_address: felt,
     token_id: Uint256,
-    timestamp: felt,
-    purchase_price: Uint256,
-    seller_address: felt,
     buyer_address: felt,
+    seller_address: felt,
+    price: Uint256,
+    payment_token: felt,
+    event_type: felt, // 0 for BUY, 1 for SALE
+    tx_hash: felt,
+    timestamp: felt,
+    block_number: felt,
 }
 
-struct Transaction {
-    timestamp: felt,
-    amount: felt,
+struct VolumeData {
+    time: felt, // in minutes
+    count: felt, // no. of tx
+    amount: Uint256, // total amount transacted
+}
+
+struct WalletTransaction {
+    address: felt,
+    txHash: felt,
+    // 0 -> buyer
+    // 1 -> seller
+    // 2 -> from
+    // 3 -> to
     type: felt,
 }
 
-struct TransactionData {
+struct AveragePrice {
     time: felt,
-    amount: felt,
-    count: felt,
-    value: felt,
+    average_price: felt,
 }
 
 @storage_var
-func transaction(index: felt) -> (tx: Transaction) {
+func nft_transaction_data(index: felt) -> (tx: NftTransactionData) {
 }
 
 @storage_var
-func transaction_length() -> (res: felt) {
+func nft_transaction_data_length() -> (res: felt) {
 }
 
 // Sum of all price
@@ -52,18 +62,101 @@ func time_unit() -> (res: felt) {
 
 // Insert data to smart contract
 @external
-func input_data{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
-    price: felt, timestamp: felt, type: felt
+func add_nft_transaction{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr} (
+    collection_address: felt,
+    token_id: Uint256,
+    buyer_address: felt,
+    seller_address: felt,
+    price: Uint256,
+    payment_token: felt,
+    event_type: felt, // 0 for BUY, 1 for SALE
+    tx_hash: felt,
+    timestamp: felt,
+    block_number: felt
 ) -> () {
     // create a array of struct pointer
-    let (current_index) = transaction_length.read();
-    transaction.write(
+    let (current_index) = nft_transaction_data_length.read();
+    nft_transaction_data.write(
         index=current_index,
-        value=Transaction(timestamp=timestamp, amount=price, type=type)
+        value=NftTransactionData(
+            collection_address=collection_address,
+            token_id= token_id,
+            buyer_address= buyer_address,
+            seller_address= seller_address,
+            price= price,
+            payment_token= payment_token,
+            event_type=event_type,
+            tx_hash= tx_hash,
+            timestamp=timestamp,
+            block_number=block_number,
+        )
     );
+    nft_transaction_data_length.write(value=current_index + 1);
 
     return ();
 }
+
+
+@view
+func get_24_hour_volume{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    // address: felt // NFT collection address
+) -> (tx_len: felt, tx: VolumeData*) {
+    let (total_length) = nft_transaction_data_length.read();
+    let (tx: VolumeData*) = alloc();
+    let (tx_len, final_tx) = get_24_hour_volume_internal(0, total_length, 0, tx);
+    return (tx_len, final_tx);
+}
+
+func get_24_hour_volume_internal{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    current_index: felt, total_length: felt, tx_len: felt, tx: VolumeData*
+) -> (tx_len: felt, tx: VolumeData*) {
+    if (current_index == total_length) {
+        return (tx_len, tx);
+    }
+    let (nft_tx) = nft_transaction_data.read(current_index);
+
+    assert tx[current_index] = VolumeData(
+        time=nft_tx.timestamp,
+        count=1,
+        amount=nft_tx.price,
+    );
+
+    let (tx_len, tx) = get_24_hour_volume_internal(current_index + 1, total_length, tx_len + 1, tx);
+
+    return (tx_len, tx);
+}
+
+// @external
+// func get24HourWalletsInteracted{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+//     address: felt // NFT collection address
+// ) -> (wallets_len: felt, wallets: WalletTransaction*) {
+
+// }
+
+
+// // average of latest price traded for every NFT in collection
+// @external
+// func get24HourAveragePrice{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+//     address: felt // NFT collection address
+// ) -> (average_price: felt) {
+
+// }
+
+// // array of {averagePrice, time}
+// @external
+// func get24HourAveragePrices{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+//     address: felt // NFT collection address
+// ) -> (avg_prices_len: felt, avg_prices: AveragePrice*) {
+
+// }
+
+// @external
+// func get24HourFloorPrice{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+//     address: felt // NFT collection address
+// ) -> (floor_price: felt) {
+
+// }
+
 
 // @external
 // func input_data_internal{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
