@@ -83,14 +83,17 @@ export default function Algorithms() {
       <h1 className="text-3xl md:text-4xl mb-2 md:mb-4 font-bold">
         Algorithms
       </h1>
+      <p className="max-w-2xl mb-4">
+        We value transparency, so we open-sourced our search algorithms. Our aim is to provide a trustworthy source of data for consumers. 
+      </p>
       <p className="max-w-2xl">
-        We value transparency, so we open-sourced our search algorithms. Our aim is to provide a trustworthy source of data for consumers. See something wrong with the algorithms or if you feel that you can improve it, feel free to 
+        Below are the list of algorithms that we are currently using for our data analytics. See something wrong with the algorithms or if you feel that you can improve it, feel free to 
         <a href="https://github.com/marcuspang/starknet-data-aggregator" className="text-blue-300"> submit a pull request. </a>
         We welcome all contributions!
       </p>
-      <div class="space-y-4 md:space-y-8 mt-4 md:mt-8">
-      { algos.map((algo) => (
-        <div>
+      <div className="space-y-4 md:space-y-8 mt-4 md:mt-8">
+      { algos.map((algo, id) => (
+        <div key={id}>
           <h2 className="font-bold text-xl md:text-3xl">{algo.name}</h2>
           <pre className="max-h-80 overflow-y-scroll">
             <code className="language-javascript text-sm">

@@ -5,9 +5,9 @@ export default function Header() {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   const navs = [
-    { name: 'Search', slug: 'search' },
+    // { name: 'Search', slug: 'search' },
     { name: 'Algorithms', slug: 'algorithms' },
-    { name: 'About', slug: 'about' },
+    // { name: 'About', slug: 'about' },
   ]
 
   return (
@@ -20,6 +20,9 @@ export default function Header() {
               <a>{ nav.name }</a>
             </Link>
           )) }
+          <a href="https://github.com/marcuspang/starknet-data-aggregator">
+            GitHub
+          </a>
         </div>
         <button className="md:hidden" onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}>
           { isMobileNavOpen 
