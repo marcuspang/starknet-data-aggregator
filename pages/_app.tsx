@@ -3,6 +3,7 @@ import Head from 'next/head'
 
 import Header from '../components/Header'
 import '../styles/globals.css'
+import '../styles/dracula-prism.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
