@@ -219,20 +219,42 @@ func get_floor_price_internal{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, ra
     let (nft_tx) = nft_transaction_data.read(current_index);
 
 
-    let(tx_len,tx) = get_floor_price_internal(current_index,total_length,tx_len,tx);
+    let(tx_len,tx) = get_floor_price_internal(current_index + 1,total_length,tx_len + 1,tx);
 
     return(tx_len,tx);
     
 
 }
 
-// @external
-// func get24HourWalletsInteracted{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
-//     address: felt // NFT collection address
-// ) -> (wallets_len: felt, wallets: WalletTransaction*) {
+@external
+func get_24_hour_wallets_interacted{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    address: felt // NFT collection address
+) -> (tx_len: felt, tx: WalletTransaction*) {
+     let (total_length) = nft_transaction_data_length.read();
+    let (tx: WalletTransaction*) = alloc();
+    let (tx_len, final_tx) = get_24_hour_wallets_interacted_internal(0, total_length, 0, tx);
+    return (tx_len, final_tx);
+}
 
-// }
 
+func get_24_hour_wallets_interacted_internal{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    current_index: felt, total_length: felt, wallets_len: felt, wallets: WalletTransaction*
+) -> (wallets_len: felt, wallets: WalletTransaction*) {
+    if(current_index == total_length){
+        return(wallets_len,wallets);
+    }
+    let(nft_tx) = nft_transaction_data.read(current_index);
+
+    assert tx[current_index] = WalletTransaction(
+        address=nft_tx.buyer_address,
+        tx_hash=nft_tx.tx_hash,
+        type=nft_tx.event_type,
+    );
+
+    let(wallets_len,wallets) = get_24_hour_wallets_interacted_internal(current_index + 1,total_length,wallets_len + 1,wallets);
+
+    return(wallets_len,wallets);
+}
 
 // // average of latest price traded for every NFT in collection
 // @external
