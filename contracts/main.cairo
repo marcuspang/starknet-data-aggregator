@@ -29,7 +29,7 @@ struct MarketCap {
 }
 
 struct FloorPriceData {
-    price: felt,
+    price: Uint256,
 }
 
 struct WalletTransaction {
