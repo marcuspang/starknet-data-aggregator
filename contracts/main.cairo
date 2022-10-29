@@ -2,6 +2,7 @@
 from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.cairo.common.alloc import alloc
 from starkware.cairo.common.uint256 import (Uint256, split_64)
+from starkware.cairo.common.bool import FALSE, TRUE
 
 struct NftTransactionData {
     collection_address: felt,
@@ -22,6 +23,15 @@ struct VolumeData {
     amount: Uint256, // total amount transacted
 }
 
+struct MarketCap {
+    count: felt,
+    amount: Uint256,
+}
+
+struct FloorPriceData {
+    price: felt,
+}
+
 struct WalletTransaction {
     address: felt,
     txHash: felt,
@@ -34,7 +44,7 @@ struct WalletTransaction {
 
 struct AveragePrice {
     time: felt,
-    average_price: felt,
+    average_price: Uint256,
 }
 
 @storage_var
@@ -124,6 +134,96 @@ func get_24_hour_volume_internal{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*,
     let (tx_len, tx) = get_24_hour_volume_internal(current_index + 1, total_length, tx_len + 1, tx);
 
     return (tx_len, tx);
+}
+
+@view
+func get_market_cap{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    // address: felt // NFT collection address
+) -> (tx_len: felt, tx: MarketCap*) {
+    let (total_length) = nft_transaction_data_length.read();
+    let (tx: MarketCap*) = alloc();
+    let (tx_len, final_tx) = get_market_cap_internal(0, total_length, 0, tx);
+    return (tx_len, final_tx);
+}
+func get_market_cap_internal{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    current_index: felt, total_length: felt, tx_len: felt, tx: MarketCap*
+) -> (tx_len: felt, tx: MarketCap*) {
+    if(current_index == total_length){
+        return(tx_len, tx);
+    }
+
+    let (nft_tx) = nft_transaction_data.read(current_index);
+
+
+    assert tx[current_index] = MarketCap(
+        count=1,
+        amount=nft_tx.price,
+    );
+
+    let (tx_len, tx) = get_market_cap_internal(current_index + 1, total_length, tx_len + 1, tx);
+
+    return (tx_len, tx);
+}
+
+@external
+func get_average_price{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    //address
+)-> (tx_len: felt, tx: AveragePrice*) {
+    let (total_length) = nft_transaction_data_length.read();
+    let (tx: AveragePrice*) = alloc();
+    let (tx_len, final_tx) = get_average_price_internal(0, total_length, 0, tx);
+    return (tx_len, final_tx);
+}
+
+func get_average_price_internal{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    current_index: felt, total_length: felt, tx_len: felt, tx: AveragePrice*
+)->(tx_len:felt, tx: AveragePrice*) {
+    if(current_index == total_length){
+        return(tx_len, tx);
+    }
+
+    let (nft_tx) = nft_transaction_data.read(current_index);
+
+
+    assert tx[current_index] = AveragePrice(
+        time=nft_tx.timestamp,
+        average_price=nft_tx.price,
+    );
+
+    let (tx_len, tx) = get_average_price_internal(current_index + 1, total_length, tx_len + 1, tx);
+
+    return (tx_len, tx);
+}
+
+//marketcap done
+//floor price done
+//average price (daily) 
+//wallet interacted
+
+
+@view
+func get_floor_price{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    max: felt, min: felt
+)->(tx_len: felt, tx: FloorPriceData*,max: felt, min: felt) {
+    let (total_length) = nft_transaction_data_length.read();
+    let (tx: FloorPriceData*) = alloc();
+    let (tx_len, final_tx) = get_floor_price_internal(0, total_length, 0, tx);
+    return (tx_len, final_tx,max,min);
+}
+func get_floor_price_internal{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    current_index: felt, total_length: felt, tx_len: felt, tx: FloorPriceData*
+) -> (tx_len: felt, tx: FloorPriceData*) {
+    if(current_index == total_length){
+        return(tx_len,tx);
+    }
+    let (nft_tx) = nft_transaction_data.read(current_index);
+
+
+    let(tx_len,tx) = get_floor_price_internal(current_index,total_length,tx_len,tx);
+
+    return(tx_len,tx);
+    
+
 }
 
 // @external
