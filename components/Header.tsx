@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image'
 import { useState } from 'react'
 
 export default function Header() {
@@ -13,7 +14,10 @@ export default function Header() {
   return (
     <header className="font-medium text-lg md:text-xl bg-neutral-900 text-neutral-100 w-full">
       <nav className="h-16 px-4 py-3  flex items-center justify-between max-w-4xl m-auto">
-        <Link href="/"><a>Starknet2</a></Link>
+        <div className='flex justify-between items-center'>
+          <Image src={"/letter-t.png"} alt={""} width={30} height={30} />
+        <Link href="/"><a>Teresa</a></Link>
+        </div>
         <div className="space-x-4 hidden md:block">
           { navs.map((nav) => (
             <Link href={nav.slug} key={nav.slug} >

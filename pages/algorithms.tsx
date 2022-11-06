@@ -10,70 +10,98 @@ export default function Algorithms() {
     {
       name: '24 Hour Volume',
       url: 'https://stackoverflow.com',
-      code: `function volume24Hour(
-    address from,
-    address to,
-    uint id
-) public {
-    require(from == _ownerOf[id], "from != owner");
-    require(to != address(0), "transfer to zero address");
-
-    require(_isApprovedOrOwner(from, msg.sender, id), "not authorized");
-
-    _balanceOf[from]--;
-    _balanceOf[to]++;
-    _ownerOf[id] = to;
-
-    delete _approvals[id];
-
-    emit Transfer(from, to, id);
-}
+      code: `func get_24_hour_volume{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+        address: felt // NFT collection address
+    ) -> (tx_len: felt, tx: VolumeData*) {
+        let (total_length) = nft_transaction_data_length.read();
+        let (tx: VolumeData*) = alloc();
+        let (tx_len, final_tx) = get_24_hour_volume_internal(0, total_length, 0, tx);
+        return (tx_len, final_tx);
+    }
+    
+    func get_24_hour_volume_internal{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+        current_index: felt, total_length: felt, tx_len: felt, tx: VolumeData*
+    ) -> (tx_len: felt, tx: VolumeData*) {
+        if (current_index == total_length) {
+            return (tx_len, tx);
+        }
+        let (nft_tx) = nft_transaction_data.read(current_index);
+    
+        assert tx[current_index] = VolumeData(
+            time=nft_tx.timestamp,
+            count=1,
+            amount=nft_tx.price,
+        );
+    
+        let (tx_len, tx) = get_24_hour_volume_internal(current_index + 1, total_length, tx_len + 1, tx);
+    
+        return (tx_len, tx);
+    }
       `
     },
     {
       name: 'Market Cap',
       url: 'https://stackoverflow.com',
-      code: `function marketCap(
-    address from,
-    address to,
-    uint id
-) public {
-    require(from == _ownerOf[id], "from != owner");
-    require(to != address(0), "transfer to zero address");
-
-    require(_isApprovedOrOwner(from, msg.sender, id), "not authorized");
-
-    _balanceOf[from]--;
-    _balanceOf[to]++;
-    _ownerOf[id] = to;
-
-    delete _approvals[id];
-
-    emit Transfer(from, to, id);
-}
+      code: `func get_market_cap{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+        address: felt // NFT collection address
+    ) -> (tx_len: felt, tx: MarketCap*) {
+        let (total_length) = nft_transaction_data_length.read();
+        let (tx: MarketCap*) = alloc();
+        let (tx_len, final_tx) = get_market_cap_internal(0, total_length, 0, tx);
+        return (tx_len, final_tx);
+    }
+    func get_market_cap_internal{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+        current_index: felt, total_length: felt, tx_len: felt, tx: MarketCap*
+    ) -> (tx_len: felt, tx: MarketCap*) {
+        if(current_index == total_length){
+            return(tx_len, tx);
+        }
+    
+        let (nft_tx) = nft_transaction_data.read(current_index);
+    
+    
+        assert tx[current_index] = MarketCap(
+            count=1,
+            amount=nft_tx.price,
+        );
+    
+        let (tx_len, tx) = get_market_cap_internal(current_index + 1, total_length, tx_len + 1, tx);
+    
+        return (tx_len, tx);
+    }
       `
     },
     {
-      name: 'No. of Owners',
+      name: 'Average Price',
       url: 'https://stackoverflow.com',
-      code: `function marketCap(
-    address from,
-    address to,
-    uint id
-) public {
-    require(from == _ownerOf[id], "from != owner");
-    require(to != address(0), "transfer to zero address");
-
-    require(_isApprovedOrOwner(from, msg.sender, id), "not authorized");
-
-    _balanceOf[from]--;
-    _balanceOf[to]++;
-    _ownerOf[id] = to;
-
-    delete _approvals[id];
-
-    emit Transfer(from, to, id);
-}
+      code: `func get_average_price{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+        address: felt // NFT collection address
+    )-> (tx_len: felt, tx: AveragePrice*) {
+        let (total_length) = nft_transaction_data_length.read();
+        let (tx: AveragePrice*) = alloc();
+        let (tx_len, final_tx) = get_average_price_internal(0, total_length, 0, tx);
+        return (tx_len, final_tx);
+    }
+    
+    func get_average_price_internal{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+        current_index: felt, total_length: felt, tx_len: felt, tx: AveragePrice*
+    )->(tx_len:felt, tx: AveragePrice*) {
+        if(current_index == total_length){
+            return(tx_len, tx);
+        }
+    
+        let (nft_tx) = nft_transaction_data.read(current_index);
+    
+    
+        assert tx[current_index] = AveragePrice(
+            time=nft_tx.timestamp,
+            average_price=nft_tx.price,
+        );
+    
+        let (tx_len, tx) = get_average_price_internal(current_index + 1, total_length, tx_len + 1, tx);
+    
+        return (tx_len, tx);
+    }
       `
     },
   ]
