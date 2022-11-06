@@ -11,7 +11,7 @@ interface VolumeData {
 export default function Search() {
   const { contract } = useContract({
     abi: abi as any,
-    address: "0x7c84ad9dbfec683c5fa0f12511ccea63b051e64e556e3abcddaef72c40ffbd6",
+    address: process.env.CONTRACT_ADDRESS,
   })
   const { data, loading, refresh, error } = useStarknetCall({
     contract,
