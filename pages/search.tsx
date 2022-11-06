@@ -1,8 +1,8 @@
 import Image from 'next/image'
 
 export default function Search() {
-  const bannerLoader = ({ src }) => (`https://logo.nftscan.com/banner/${src}.png`)
-  const logoLoader = ({ src }) => (`https://logo.nftscan.com/logo/${src}.png`)
+  const bannerLoader = ({ src }: { src: string }) => (`https://logo.nftscan.com/banner/${src}.png`)
+  const logoLoader = ({ src }: { src: string }) => (`https://logo.nftscan.com/logo/${src}.png`)
   const collection = {
     name: 'CryptoPunks',
     by: 'C352B5',
@@ -23,23 +23,23 @@ export default function Search() {
   return (
     <>
       <div className="h-32 md:h-56 relative">
-        <Image 
+        <Image
           loader={bannerLoader}
-          src="0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb" 
+          src="0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb"
           layout="fill"
           className="object-cover"
         />
         <div className="h-32 md:h-56 max-w-4xl m-auto relative">
-        <div className="absolute -bottom-8 md:-bottom-16 left-8 w-4xl m-auto">
-          <div className="w-24 h-24 md:w-48 md:h-48 border-4 md:border-8 border-neutral-100 rounded-full relative">
-            <Image 
-              loader={logoLoader}
-              src="0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb" 
-              layout="fill"
-              className="object-cover rounded-full"
-            />
+          <div className="absolute -bottom-8 md:-bottom-16 left-8 w-4xl m-auto">
+            <div className="w-24 h-24 md:w-48 md:h-48 border-4 md:border-8 border-neutral-100 rounded-full relative">
+              <Image
+                loader={logoLoader}
+                src="0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb"
+                layout="fill"
+                className="object-cover rounded-full"
+              />
+            </div>
           </div>
-        </div>
         </div>
       </div>
       <div className="px-4 py-2 max-w-4xl m-auto mt-12 md:mt-24">
@@ -71,9 +71,9 @@ export default function Search() {
         <div className="mb-4 md:mb-8">
           <h2 className="text-xl md:text-3xl font-bold mb-2 md:mb-4">Trending</h2>
           <div className="space-y-2 md:space-y-3">
-            { trending.map((nft, id) => (
-              <div 
-                key={id} 
+            {trending.map((nft, id) => (
+              <div
+                key={id}
                 className={"flex justify-between " + (id < 3 ? 'card-primary' : 'card-secondary')}
               >
                 <div className="flex gap-2 md:gap-4">
@@ -81,9 +81,9 @@ export default function Search() {
                     {id + 1}
                   </div>
                   <div className="w-16 h-16 md:w-24 md:h-24 rounded-xl relative">
-                    <Image 
+                    <Image
                       loader={logoLoader}
-                      src="0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb" 
+                      src="0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb"
                       layout="fill"
                       className="object-cover rounded-xl"
                     />
@@ -99,7 +99,7 @@ export default function Search() {
                   </svg>
                 </a>
               </div>
-            )) }
+            ))}
           </div>
         </div>
       </div>

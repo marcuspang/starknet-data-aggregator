@@ -1,25 +1,252 @@
 [
     {
-        "inputs": [
+        "members": [
             {
-                "name": "users_address",
+                "name": "low",
+                "offset": 0,
+                "type": "felt"
+            },
+            {
+                "name": "high",
+                "offset": 1,
                 "type": "felt"
             }
         ],
-        "name": "constructor",
+        "name": "Uint256",
+        "size": 2,
+        "type": "struct"
+    },
+    {
+        "members": [
+            {
+                "name": "time",
+                "offset": 0,
+                "type": "felt"
+            },
+            {
+                "name": "count",
+                "offset": 1,
+                "type": "felt"
+            },
+            {
+                "name": "amount",
+                "offset": 2,
+                "type": "Uint256"
+            }
+        ],
+        "name": "VolumeData",
+        "size": 4,
+        "type": "struct"
+    },
+    {
+        "members": [
+            {
+                "name": "count",
+                "offset": 0,
+                "type": "felt"
+            },
+            {
+                "name": "amount",
+                "offset": 1,
+                "type": "Uint256"
+            }
+        ],
+        "name": "MarketCap",
+        "size": 3,
+        "type": "struct"
+    },
+    {
+        "members": [
+            {
+                "name": "time",
+                "offset": 0,
+                "type": "felt"
+            },
+            {
+                "name": "average_price",
+                "offset": 1,
+                "type": "Uint256"
+            }
+        ],
+        "name": "AveragePrice",
+        "size": 3,
+        "type": "struct"
+    },
+    {
+        "members": [
+            {
+                "name": "price",
+                "offset": 0,
+                "type": "felt"
+            }
+        ],
+        "name": "FloorPriceData",
+        "size": 1,
+        "type": "struct"
+    },
+    {
+        "inputs": [
+            {
+                "name": "collection_address",
+                "type": "felt"
+            },
+            {
+                "name": "token_id",
+                "type": "Uint256"
+            },
+            {
+                "name": "buyer_address",
+                "type": "felt"
+            },
+            {
+                "name": "seller_address",
+                "type": "felt"
+            },
+            {
+                "name": "price",
+                "type": "Uint256"
+            },
+            {
+                "name": "payment_token",
+                "type": "felt"
+            },
+            {
+                "name": "event_type",
+                "type": "felt"
+            },
+            {
+                "name": "tx_hash",
+                "type": "felt"
+            },
+            {
+                "name": "timestamp",
+                "type": "felt"
+            },
+            {
+                "name": "block_number",
+                "type": "felt"
+            }
+        ],
+        "name": "add_nft_transaction",
         "outputs": [],
-        "type": "constructor"
+        "type": "function"
     },
     {
         "inputs": [],
-        "name": "get_users_address",
+        "name": "get_24_hour_volume",
         "outputs": [
             {
-                "name": "users_address",
+                "name": "tx_len",
+                "type": "felt"
+            },
+            {
+                "name": "tx",
+                "type": "VolumeData*"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "get_market_cap",
+        "outputs": [
+            {
+                "name": "tx_len",
+                "type": "felt"
+            },
+            {
+                "name": "tx",
+                "type": "MarketCap*"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "get_average_price",
+        "outputs": [
+            {
+                "name": "tx_len",
+                "type": "felt"
+            },
+            {
+                "name": "tx",
+                "type": "AveragePrice*"
+            }
+        ],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "max",
+                "type": "felt"
+            },
+            {
+                "name": "min",
+                "type": "felt"
+            }
+        ],
+        "name": "get_floor_price",
+        "outputs": [
+            {
+                "name": "tx_len",
+                "type": "felt"
+            },
+            {
+                "name": "tx",
+                "type": "FloorPriceData*"
+            },
+            {
+                "name": "max",
+                "type": "felt"
+            },
+            {
+                "name": "min",
                 "type": "felt"
             }
         ],
         "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "price",
+                "type": "felt"
+            }
+        ],
+        "name": "increase_amount",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "get_amount",
+        "outputs": [
+            {
+                "name": "res",
+                "type": "felt"
+            }
+        ],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "milisecond",
+                "type": "felt"
+            }
+        ],
+        "name": "set_time",
+        "outputs": [
+            {
+                "name": "res",
+                "type": "felt"
+            }
+        ],
         "type": "function"
     }
 ]
