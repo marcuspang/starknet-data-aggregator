@@ -145,6 +145,7 @@ func get_market_cap{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_
     let (tx_len, final_tx) = get_market_cap_internal(0, total_length, 0, tx);
     return (tx_len, final_tx);
 }
+
 func get_market_cap_internal{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     current_index: felt, total_length: felt, tx_len: felt, tx: MarketCap*
 ) -> (tx_len: felt, tx: MarketCap*) {
@@ -197,7 +198,7 @@ func get_average_price_internal{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, 
 
 //marketcap done
 //floor price done
-//average price (daily) 
+//average price (daily)
 //wallet interacted
 
 
@@ -222,8 +223,6 @@ func get_floor_price_internal{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, ra
     let(tx_len,tx) = get_floor_price_internal(current_index + 1,total_length,tx_len + 1,tx);
 
     return(tx_len,tx);
-    
-
 }
 
 @external

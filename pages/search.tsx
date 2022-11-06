@@ -1,6 +1,31 @@
+import { Abi } from '@shardlabs/starknet-hardhat-plugin/dist/src/starknet-types'
+import { useContract } from '@starknet-react/core'
+import { useStarknetCall } from '@starknet-react/core/dist/hooks'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
+import abi from "../build/main_abi.json"
+
+interface VolumeData {
+  tx: any[];
+  tx_len: number;
+}
 
 export default function Search() {
+  const { contract } = useContract({
+    abi: abi as any,
+    address: "0x7c84ad9dbfec683c5fa0f12511ccea63b051e64e556e3abcddaef72c40ffbd6",
+  })
+  const { data, loading, refresh, error } = useStarknetCall({
+    contract,
+    method: 'get_24_hour_volume',
+    args: [],
+    options: {
+      watch: false,
+    }
+  })
+  
+  console.log(data)
+
   const bannerLoader = ({ src }: { src: string }) => (`https://logo.nftscan.com/banner/${src}.png`)
   const logoLoader = ({ src }: { src: string }) => (`https://logo.nftscan.com/logo/${src}.png`)
   const collection = {
@@ -27,6 +52,7 @@ export default function Search() {
           loader={bannerLoader}
           src="0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb"
           layout="fill"
+          alt='NFT Banner'
           className="object-cover"
         />
         <div className="h-32 md:h-56 max-w-4xl m-auto relative">
@@ -36,6 +62,7 @@ export default function Search() {
                 loader={logoLoader}
                 src="0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb"
                 layout="fill"
+                alt='NFT Logo'
                 className="object-cover rounded-full"
               />
             </div>
@@ -85,6 +112,7 @@ export default function Search() {
                       loader={logoLoader}
                       src="0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb"
                       layout="fill"
+                      alt='NFT Logo'
                       className="object-cover rounded-xl"
                     />
                   </div>
