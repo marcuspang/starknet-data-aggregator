@@ -166,9 +166,9 @@ func get_market_cap_internal{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, ran
     return (tx_len, tx);
 }
 
-@external
+@view
 func get_average_price{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
-    //address
+    // address: felt // NFT collection address
 )-> (tx_len: felt, tx: AveragePrice*) {
     let (total_length) = nft_transaction_data_length.read();
     let (tx: AveragePrice*) = alloc();
@@ -184,7 +184,6 @@ func get_average_price_internal{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, 
     }
 
     let (nft_tx) = nft_transaction_data.read(current_index);
-
 
     assert tx[current_index] = AveragePrice(
         time=nft_tx.timestamp,
