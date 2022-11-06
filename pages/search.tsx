@@ -1,8 +1,6 @@
-import { Abi } from '@shardlabs/starknet-hardhat-plugin/dist/src/starknet-types'
 import { useContract } from '@starknet-react/core'
 import { useStarknetCall } from '@starknet-react/core/dist/hooks'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
 import abi from "../build/main_abi.json"
 
 interface VolumeData {
@@ -23,8 +21,6 @@ export default function Search() {
       watch: false,
     }
   })
-  
-  console.log(data)
 
   const bannerLoader = ({ src }: { src: string }) => (`https://logo.nftscan.com/banner/${src}.png`)
   const logoLoader = ({ src }: { src: string }) => (`https://logo.nftscan.com/logo/${src}.png`)
