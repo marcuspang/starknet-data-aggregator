@@ -18,7 +18,7 @@ export default function Home() {
         <h1 className="text-4xl md:text-6xl font-bold text-center">
           Fully Transparent NFT Explorer
         </h1>
-        <p className="text-xl md:text-2xl text-center">An on-chain Data Aggregator, Full Transparency and Scalibilty with Customized NFT Exploration</p>
+        <p className="text-xl md:text-2xl text-center">An on-chain Data Aggregator, Full Transparency and Scalability with Customized NFT Exploration</p>
         <div className="p-2 bg-secondary rounded-full text-xl flex items-center justify-between w-full md:w-3/4">
           <input 
             className="w-[calc(200%-24px)] bg-transparent border-none rounded-full focus:outline-none placeholder:text-neutral-100 placeholder:opacity-50 truncate px-2"
