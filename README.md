@@ -1,6 +1,6 @@
 # Teresa 
 
-![letter-t (1)](https://user-images.githubusercontent.com/74396818/204692988-cf21c9f1-cbba-4b09-b921-af5c7a4484e0.png)
+![letter-t (2)](https://user-images.githubusercontent.com/74396818/204694052-0e8acfd1-9709-4c21-aee8-5fa758f0014e.png)
 
 ## Project Description
 Teresa is a transparent data aggregator paltform that leverage Starnet's computation  capabilities to perform aggregation on-chain. Existing platforms that aggregate data do so in a centralised manner. Aggregation is usually done off-chain, where the specifics are not available to the user. As such, Teresa tackles this issue by performing this computation on-chain and exposing this logic to the user.
