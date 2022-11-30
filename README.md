@@ -1,5 +1,5 @@
 # Teresa 
-<br>
+
 ![letter-t (1)](https://user-images.githubusercontent.com/74396818/204692988-cf21c9f1-cbba-4b09-b921-af5c7a4484e0.png)
 
 ## Project Description
